@@ -205,18 +205,20 @@ def _extract_field_size(dataset):
                 length_y = int((-jaw_position[0] + jaw_position[1]) / 10)
             elif device_type == "ASYMX":
                 if length_x != -1:
-                    print("Two Beam Limiting Device on X axis!")
+                    print("Two Beam Limiting Device on X axis!")#TODO:need to figure out how to deal with two X jaws.
                     length_x = int((-jaw_position[0] + jaw_position[1]) / 10)
             elif device_type == "ASYMY":
                 if length_y != -1:
                     print("Two Beam Limiting Device on Y axis!")
                 length_y = int((-jaw_position[0] + jaw_position[1]) / 10)
         else:
-            print("Sorry, cannot extract field size with MLCX/MLCY")
+            return "Sorry, cannot extract field size with MLCX/MLCY"
     if length_x == -1:
         print("No Beam Limiting Device on X axis!")
+        return str(length_y) + "x" + str(0)
     elif length_y == -1:
         print("No Beam Limiting Device on Y axis!")
+        return str(0) + "x" + str(length_x)
     else:
         #print(str(length_y) + "x" + str(length_x))
         return str(length_y) + "x" + str(length_x)
